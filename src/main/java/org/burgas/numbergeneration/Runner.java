@@ -23,8 +23,8 @@ public final class Runner {
                                 Collectors.mapping(Order::cost, Collectors.reducing(Double::sum))
                         )
                 );
-
-        System.out.println(collect);
+        System.out.println("Группировка по продуктам и нахождение общей стоимости по группам");
+        System.out.println(collect + "\n");
 
         // Сортировка по убыванию общей стоимости
         List<Map.Entry<String, Optional<Double>>> list = collect.entrySet().stream()
@@ -34,20 +34,23 @@ public final class Runner {
                 )
                 .toList();
 
-        System.out.println(list);
+        System.out.println("Сортировка по убыванию общей стоимости");
+        System.out.println(list + "\n");
 
+
+        // Выбрать три самых дорогих продукта
         List<Order> tempList = orders.stream()
                 .sorted((o1, o2) -> (int) (o2.cost() - o1.cost()))
                 .limit(3)
                 .toList();
 
-        // Выбрать три самых дорогих продукта
         List<String> expensiveProducts = tempList
                 .stream()
                 .map(Order::product)
                 .toList();
 
-        System.out.println(expensiveProducts);
+        System.out.println("Выбрать три самых дорогих продукта");
+        System.out.println(expensiveProducts + "\n");
 
         // Самые дорогие продукты и их стоимость
         Double sum = tempList.stream()
@@ -58,6 +61,8 @@ public final class Runner {
         Map<List<String>, Double> expensiveProductsAndCost = new HashMap<>(
                 Map.of(expensiveProducts, sum)
         );
+
+        System.out.println("Самые дорогие продукты и их стоимость");
         System.out.println(expensiveProductsAndCost);
     }
 }
