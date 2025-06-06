@@ -23,6 +23,7 @@ public final class Runner {
                                 Collectors.mapping(Order::cost, Collectors.reducing(Double::sum))
                         )
                 );
+
         System.out.println("Группировка по продуктам и нахождение общей стоимости по группам");
         System.out.println(collect + "\n");
 
